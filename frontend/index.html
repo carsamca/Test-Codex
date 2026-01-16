@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Voice Sales Agent</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section class="hero">
+        <h1>Voice Sales Agent</h1>
+        <p>Habla con nuestro agente multidioma y recibe una propuesta en minutos.</p>
+      </section>
+    </main>
+
+    <button id="voice-widget-toggle" class="voice-widget-toggle" aria-label="Abrir asistente">
+      🎙️ Hablar
+    </button>
+
+    <section id="voice-widget" class="voice-widget" aria-live="polite">
+      <header>
+        <div>
+          <h2>Asistente de ventas</h2>
+          <p id="voice-language">Idioma: automático</p>
+        </div>
+        <button id="voice-widget-close" aria-label="Cerrar">✕</button>
+      </header>
+      <div class="voice-widget-body">
+        <div id="voice-transcript" class="voice-transcript"></div>
+        <div class="voice-actions">
+          <button id="voice-start" class="primary">🎤 Escuchar</button>
+          <button id="voice-stop" class="secondary" disabled>⏹️ Detener</button>
+        </div>
+        <div class="voice-text-entry">
+          <input id="voice-text" placeholder="Escribe aquí si prefieres texto" />
+          <button id="voice-send" class="secondary">Enviar</button>
+        </div>
+      </div>
+    </section>
+
+    <script src="app.js"></script>
+  </body>
+</html>
