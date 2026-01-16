@@ -1,0 +1,132 @@
+:root {
+  font-family: "Inter", system-ui, sans-serif;
+  color: #0f172a;
+  background: #f8fafc;
+}
+
+body {
+  margin: 0;
+}
+
+.page {
+  padding: 4rem 2rem;
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.hero {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+}
+
+.voice-widget-toggle {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 14px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 12px 24px rgba(37, 99, 235, 0.3);
+}
+
+.voice-widget {
+  position: fixed;
+  bottom: 90px;
+  right: 24px;
+  width: 320px;
+  max-height: 520px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.2);
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.voice-widget.active {
+  display: flex;
+}
+
+.voice-widget header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 18px;
+  background: #eff6ff;
+}
+
+.voice-widget-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 18px;
+}
+
+.voice-transcript {
+  background: #f1f5f9;
+  border-radius: 12px;
+  padding: 12px;
+  max-height: 220px;
+  overflow-y: auto;
+  font-size: 0.95rem;
+}
+
+.voice-transcript .entry {
+  margin-bottom: 12px;
+}
+
+.voice-transcript .entry strong {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: #475569;
+  margin-bottom: 4px;
+}
+
+.voice-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.voice-text-entry {
+  display: flex;
+  gap: 8px;
+}
+
+.voice-text-entry input {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #cbd5f5;
+}
+
+button.primary {
+  flex: 1;
+  background: #2563eb;
+  border: none;
+  color: #fff;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+button.secondary {
+  flex: 1;
+  background: #e2e8f0;
+  border: none;
+  color: #0f172a;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
