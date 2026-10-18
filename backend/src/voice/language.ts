@@ -52,21 +52,16 @@ export function detectLanguage(text: string, hint?: string): SupportedLanguage {
     return forced;
   }
 
-  const normalizedHint = hint?.toLowerCase();
+  const normalizedHint = hint?.toLowerCase().split(/[-_]/)[0];
   if (normalizedHint === "es" || normalizedHint === "en" || normalizedHint === "fr" || normalizedHint === "pt") {
     return normalizedHint;
   }
 
   const lower = text.toLowerCase();
-  if (/[ñáéíóú]/.test(lower) || /(hola|gracias|necesito|presupuesto)/.test(lower)) {
-    return "es";
-  }
-  if (/[çâêôàèùî]/.test(lower) || /(bonjour|merci|besoin|budget)/.test(lower)) {
-    return "fr";
-  }
-  if (/[ãõç]/.test(lower) || /(olá|obrigado|preciso|orçamento)/.test(lower)) {
-    return "pt";
-  }
+  // Conservative lexical heuristic, not a general-purpose language detector.
+  if (/\b(olá|obrigado|preciso|você|orçamento)(?=$|[\s.,!?])|[ãõ]/u.test(lower)) return "pt";
+  if (/\b(bonjour|merci|besoin|je|vous)\b/u.test(lower)) return "fr";
+  if (/\b(hola|gracias|necesito|presupuesto)\b|ñ/u.test(lower)) return "es";
 
   return "en";
 }

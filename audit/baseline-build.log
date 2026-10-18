@@ -1,0 +1,9 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> voice-sales-agent-backend@0.1.0 build
+> tsc -p tsconfig.json
+
+src/server.ts(2,18): error TS7016: Could not find a declaration file for module 'cors'. '/workspace/scratch/c58f746beb8d/voice-sales-original/backend/node_modules/cors/lib/index.js' implicitly has an 'any' type.
+  Try `npm i --save-dev @types/cors` if it exists or add a new declaration (.d.ts) file containing `declare module 'cors';`
+src/voice/llm.ts(179,38): error TS2345: Argument of type 'Record<string, unknown>' is not assignable to parameter of type '{ name: string; contact: string; language?: string | undefined; need?: string | undefined; budget?: string | undefined; urgency?: string | undefined; } & { name: string; contact: string; datetime_preference?: string | undefined; timezone?: string | undefined; } & { ...; } & { ...; }'.
+  Type 'Record<string, unknown>' is missing the following properties from type '{ name: string; contact: string; language?: string | undefined; need?: string | undefined; budget?: string | undefined; urgency?: string | undefined; }': name, contact

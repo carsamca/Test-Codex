@@ -1,0 +1,55 @@
+{
+  "mode": "corrected",
+  "requests": [
+    {
+      "path": "/api/chat",
+      "input": {
+        "sessionId": "91f5134d-5fa1-4f38-8454-168448c10430",
+        "text": "<img src=x onerror=\"window.injected=true\">"
+      }
+    },
+    {
+      "path": "/api/tts",
+      "input": {
+        "text": "Resposta simulada",
+        "language": "pt"
+      }
+    },
+    {
+      "path": "/api/stt",
+      "input": {
+        "text": "obrigado",
+        "sessionId": "91f5134d-5fa1-4f38-8454-168448c10430"
+      }
+    },
+    {
+      "path": "/api/chat",
+      "input": {
+        "sessionId": "91f5134d-5fa1-4f38-8454-168448c10430",
+        "text": "obrigado"
+      }
+    },
+    {
+      "path": "/api/tts",
+      "input": {
+        "text": "Resposta simulada",
+        "language": "pt"
+      }
+    }
+  ],
+  "state": {
+    "recognitionLocale": "pt-BR",
+    "spoken": [
+      {
+        "text": "Resposta simulada",
+        "lang": "pt"
+      },
+      {
+        "text": "Resposta simulada",
+        "lang": "pt"
+      }
+    ],
+    "images": 0
+  },
+  "limitation": "DOM emulado con jsdom; APIs de voz y respuestas HTTP simuladas. No se probó micrófono, sonido, compatibilidad ni renderizado en navegador real."
+}

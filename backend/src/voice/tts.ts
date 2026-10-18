@@ -32,7 +32,7 @@ export async function synthesizeSpeech({ text, language }: TTSRequest): Promise<
       model: "gpt-4o-mini-tts",
       voice,
       input: text,
-      format: "mp3"
+      response_format: "mp3"
     })
   });
 

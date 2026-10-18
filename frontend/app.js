@@ -16,7 +16,11 @@ let isListening = false;
 function appendEntry(role, text) {
   const entry = document.createElement("div");
   entry.className = "entry";
-  entry.innerHTML = `<strong>${role}</strong><span>${text}</span>`;
+  const label = document.createElement("strong");
+  label.textContent = role;
+  const content = document.createElement("span");
+  content.textContent = text;
+  entry.append(label, content);
   transcriptEl.appendChild(entry);
   transcriptEl.scrollTop = transcriptEl.scrollHeight;
 }

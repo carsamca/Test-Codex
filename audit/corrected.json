@@ -1,0 +1,212 @@
+{
+  "languages": {
+    "Olá": "pt",
+    "orçamento": "pt",
+    "você": "pt",
+    "I have a budget": "en",
+    "merci beaucoup": "fr"
+  },
+  "localeHints": {
+    "es-ES": "es",
+    "en-US": "en",
+    "fr-FR": "fr",
+    "pt-BR": "pt"
+  },
+  "flowTranscript": [
+    {
+      "role": "user",
+      "text": "hola",
+      "timestamp": "2026-10-18T23:18:14.096Z"
+    },
+    {
+      "role": "assistant",
+      "text": "Gracias por tu mensaje. ¿Cuál es tu nombre?",
+      "timestamp": "2026-10-18T23:18:14.096Z"
+    }
+  ],
+  "audioSTT": {
+    "status": 501,
+    "body": {
+      "error": "Audio transcription is not implemented. Use explicit text mode."
+    }
+  },
+  "emptySTT": {
+    "status": 400,
+    "body": {
+      "error": "text or audioBase64 is required."
+    }
+  },
+  "validation": {
+    "missingChat": {
+      "status": 400,
+      "body": {
+        "error": "sessionId and text are required."
+      }
+    },
+    "numericText": {
+      "status": 400,
+      "body": {
+        "error": "sessionId and text are required."
+      }
+    },
+    "blankChat": {
+      "status": 400,
+      "body": {
+        "error": "sessionId and text are required."
+      }
+    },
+    "missingTTS": {
+      "status": 400,
+      "body": {
+        "error": "text is required."
+      }
+    }
+  },
+  "llmInput": [
+    {
+      "role": "system",
+      "content": "You are a friendly voice sales agent. Never make up prices. Ask one question at a time to collect name, contact, need, budget, and urgency. Handle objections (price, time, comparison, 'I'll think about it') with empathy and suggest a next step. Close with a CTA: book a call, leave details, or transfer to a human."
+    },
+    {
+      "role": "user",
+      "content": "hello"
+    },
+    {
+      "role": "assistant",
+      "content": "Thanks for sharing. What is your name?"
+    }
+  ],
+  "guardarLead": {
+    "reply": "Gracias por tu mensaje. ¿Cuál es tu nombre?",
+    "actions": [
+      {
+        "tool": "guardarLead",
+        "payload": {
+          "status": "ok",
+          "file": "/tmp/voice-audit-Np4Qry/data/leads.jsonl"
+        }
+      }
+    ]
+  },
+  "agendarCita": {
+    "reply": "Gracias por tu mensaje. ¿Cuál es tu nombre?",
+    "actions": [
+      {
+        "tool": "agendarCita",
+        "payload": {
+          "status": "ok",
+          "file": "/tmp/voice-audit-Np4Qry/data/appointments.jsonl"
+        }
+      }
+    ]
+  },
+  "transferirHumano": {
+    "reply": "Gracias por tu mensaje. ¿Cuál es tu nombre?",
+    "actions": [
+      {
+        "tool": "transferirHumano",
+        "payload": {
+          "status": "ok",
+          "file": "/tmp/voice-audit-Np4Qry/data/handoffs.jsonl"
+        }
+      }
+    ]
+  },
+  "buscarFAQ": {
+    "reply": "Gracias por tu mensaje. ¿Cuál es tu nombre?",
+    "actions": [
+      {
+        "tool": "buscarFAQ",
+        "payload": {
+          "answer": "We tailor proposals after understanding your needs. Can you share your main goal?",
+          "file": "/tmp/voice-audit-Np4Qry/data/faq_queries.jsonl"
+        }
+      }
+    ]
+  },
+  "toolFiles": {
+    "appointments.jsonl": [
+      {
+        "timestamp": "2026-10-18T23:18:14.115Z",
+        "payload": {
+          "name": "Synthetic Test",
+          "contact": "test@example.invalid",
+          "timezone": "UTC"
+        }
+      }
+    ],
+    "faq_queries.jsonl": [
+      {
+        "timestamp": "2026-10-18T23:18:14.116Z",
+        "payload": {
+          "query": "pricing",
+          "language": "es"
+        }
+      }
+    ],
+    "handoffs.jsonl": [
+      {
+        "timestamp": "2026-10-18T23:18:14.115Z",
+        "payload": {
+          "reason": "Synthetic test"
+        }
+      }
+    ],
+    "leads.jsonl": [
+      {
+        "timestamp": "2026-10-18T23:18:14.113Z",
+        "payload": {
+          "name": "Synthetic Test",
+          "contact": "test@example.invalid"
+        }
+      }
+    ]
+  },
+  "providerError": {
+    "error": "LLM error: 500"
+  },
+  "retryAttempts": 3,
+  "mockTTS": {
+    "audioBase64": "AQID",
+    "provider": "openai"
+  },
+  "timeoutError": "Synthetic abort",
+  "timeoutAborts": 3,
+  "concurrentRejected": {
+    "status": 409,
+    "body": {
+      "error": "A turn is already in progress for this session."
+    }
+  },
+  "concurrentSession": [
+    {
+      "role": "user",
+      "text": "first",
+      "timestamp": "2026-10-18T23:18:17.126Z"
+    },
+    {
+      "role": "assistant",
+      "text": "first reply",
+      "timestamp": "2026-10-18T23:18:17.128Z"
+    },
+    {
+      "role": "user",
+      "text": "second",
+      "timestamp": "2026-10-18T23:18:17.129Z"
+    },
+    {
+      "role": "assistant",
+      "text": "second reply",
+      "timestamp": "2026-10-18T23:18:17.129Z"
+    }
+  ],
+  "ttsRequest": {
+    "model": "gpt-4o-mini-tts",
+    "voice": "alloy",
+    "input": "synthetic",
+    "response_format": "mp3"
+  },
+  "rateLimitedRequests": 28,
+  "checks": 72,
+  "mode": "corrected"
+}

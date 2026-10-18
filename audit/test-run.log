@@ -1,0 +1,278 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> voice-sales-agent-backend@0.1.0 test
+> npm run build && node test/audit.mjs --fixed && node test/widget.mjs
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> voice-sales-agent-backend@0.1.0 build
+> tsc -p tsconfig.json
+
+Voice Sales Agent API running on http://localhost:3001
+{
+  "languages": {
+    "Olá": "pt",
+    "orçamento": "pt",
+    "você": "pt",
+    "I have a budget": "en",
+    "merci beaucoup": "fr"
+  },
+  "localeHints": {
+    "es-ES": "es",
+    "en-US": "en",
+    "fr-FR": "fr",
+    "pt-BR": "pt"
+  },
+  "flowTranscript": [
+    {
+      "role": "user",
+      "text": "hola",
+      "timestamp": "2026-10-18T23:19:38.838Z"
+    },
+    {
+      "role": "assistant",
+      "text": "Gracias por tu mensaje. ¿Cuál es tu nombre?",
+      "timestamp": "2026-10-18T23:19:38.838Z"
+    }
+  ],
+  "audioSTT": {
+    "status": 501,
+    "body": {
+      "error": "Audio transcription is not implemented. Use explicit text mode."
+    }
+  },
+  "emptySTT": {
+    "status": 400,
+    "body": {
+      "error": "text or audioBase64 is required."
+    }
+  },
+  "validation": {
+    "missingChat": {
+      "status": 400,
+      "body": {
+        "error": "sessionId and text are required."
+      }
+    },
+    "numericText": {
+      "status": 400,
+      "body": {
+        "error": "sessionId and text are required."
+      }
+    },
+    "blankChat": {
+      "status": 400,
+      "body": {
+        "error": "sessionId and text are required."
+      }
+    },
+    "missingTTS": {
+      "status": 400,
+      "body": {
+        "error": "text is required."
+      }
+    }
+  },
+  "llmInput": [
+    {
+      "role": "system",
+      "content": "You are a friendly voice sales agent. Never make up prices. Ask one question at a time to collect name, contact, need, budget, and urgency. Handle objections (price, time, comparison, 'I'll think about it') with empathy and suggest a next step. Close with a CTA: book a call, leave details, or transfer to a human."
+    },
+    {
+      "role": "user",
+      "content": "hello"
+    },
+    {
+      "role": "assistant",
+      "content": "Thanks for sharing. What is your name?"
+    }
+  ],
+  "guardarLead": {
+    "reply": "Gracias por tu mensaje. ¿Cuál es tu nombre?",
+    "actions": [
+      {
+        "tool": "guardarLead",
+        "payload": {
+          "status": "ok",
+          "file": "/tmp/voice-audit-oV7IeH/data/leads.jsonl"
+        }
+      }
+    ]
+  },
+  "agendarCita": {
+    "reply": "Gracias por tu mensaje. ¿Cuál es tu nombre?",
+    "actions": [
+      {
+        "tool": "agendarCita",
+        "payload": {
+          "status": "ok",
+          "file": "/tmp/voice-audit-oV7IeH/data/appointments.jsonl"
+        }
+      }
+    ]
+  },
+  "transferirHumano": {
+    "reply": "Gracias por tu mensaje. ¿Cuál es tu nombre?",
+    "actions": [
+      {
+        "tool": "transferirHumano",
+        "payload": {
+          "status": "ok",
+          "file": "/tmp/voice-audit-oV7IeH/data/handoffs.jsonl"
+        }
+      }
+    ]
+  },
+  "buscarFAQ": {
+    "reply": "Gracias por tu mensaje. ¿Cuál es tu nombre?",
+    "actions": [
+      {
+        "tool": "buscarFAQ",
+        "payload": {
+          "answer": "We tailor proposals after understanding your needs. Can you share your main goal?",
+          "file": "/tmp/voice-audit-oV7IeH/data/faq_queries.jsonl"
+        }
+      }
+    ]
+  },
+  "toolFiles": {
+    "appointments.jsonl": [
+      {
+        "timestamp": "2026-10-18T23:19:38.854Z",
+        "payload": {
+          "name": "Synthetic Test",
+          "contact": "test@example.invalid",
+          "timezone": "UTC"
+        }
+      }
+    ],
+    "faq_queries.jsonl": [
+      {
+        "timestamp": "2026-10-18T23:19:38.855Z",
+        "payload": {
+          "query": "pricing",
+          "language": "es"
+        }
+      }
+    ],
+    "handoffs.jsonl": [
+      {
+        "timestamp": "2026-10-18T23:19:38.854Z",
+        "payload": {
+          "reason": "Synthetic test"
+        }
+      }
+    ],
+    "leads.jsonl": [
+      {
+        "timestamp": "2026-10-18T23:19:38.852Z",
+        "payload": {
+          "name": "Synthetic Test",
+          "contact": "test@example.invalid"
+        }
+      }
+    ]
+  },
+  "providerError": {
+    "error": "LLM error: 500"
+  },
+  "retryAttempts": 3,
+  "mockTTS": {
+    "audioBase64": "AQID",
+    "provider": "openai"
+  },
+  "timeoutError": "Synthetic abort",
+  "timeoutAborts": 3,
+  "concurrentRejected": {
+    "status": 409,
+    "body": {
+      "error": "A turn is already in progress for this session."
+    }
+  },
+  "concurrentSession": [
+    {
+      "role": "user",
+      "text": "first",
+      "timestamp": "2026-10-18T23:19:41.866Z"
+    },
+    {
+      "role": "assistant",
+      "text": "first reply",
+      "timestamp": "2026-10-18T23:19:41.869Z"
+    },
+    {
+      "role": "user",
+      "text": "second",
+      "timestamp": "2026-10-18T23:19:41.871Z"
+    },
+    {
+      "role": "assistant",
+      "text": "second reply",
+      "timestamp": "2026-10-18T23:19:41.871Z"
+    }
+  ],
+  "ttsRequest": {
+    "model": "gpt-4o-mini-tts",
+    "voice": "alloy",
+    "input": "synthetic",
+    "response_format": "mp3"
+  },
+  "rateLimitedRequests": 28,
+  "checks": 72,
+  "mode": "corrected"
+}
+{
+  "mode": "corrected",
+  "requests": [
+    {
+      "path": "/api/chat",
+      "input": {
+        "sessionId": "5ca57c36-b939-4b8e-9bd3-7da9b43adb9e",
+        "text": "<img src=x onerror=\"window.injected=true\">"
+      }
+    },
+    {
+      "path": "/api/tts",
+      "input": {
+        "text": "Resposta simulada",
+        "language": "pt"
+      }
+    },
+    {
+      "path": "/api/stt",
+      "input": {
+        "text": "obrigado",
+        "sessionId": "5ca57c36-b939-4b8e-9bd3-7da9b43adb9e"
+      }
+    },
+    {
+      "path": "/api/chat",
+      "input": {
+        "sessionId": "5ca57c36-b939-4b8e-9bd3-7da9b43adb9e",
+        "text": "obrigado"
+      }
+    },
+    {
+      "path": "/api/tts",
+      "input": {
+        "text": "Resposta simulada",
+        "language": "pt"
+      }
+    }
+  ],
+  "state": {
+    "recognitionLocale": "pt-BR",
+    "spoken": [
+      {
+        "text": "Resposta simulada",
+        "lang": "pt"
+      },
+      {
+        "text": "Resposta simulada",
+        "lang": "pt"
+      }
+    ],
+    "images": 0
+  },
+  "limitation": "DOM emulado con jsdom; APIs de voz y respuestas HTTP simuladas. No se probó micrófono, sonido, compatibilidad ni renderizado en navegador real."
+}

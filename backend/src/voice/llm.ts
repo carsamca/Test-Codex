@@ -18,12 +18,32 @@ type ChatTurnInput = {
   language: SupportedLanguage;
 };
 
-const toolHandlers = {
-  guardarLead,
-  agendarCita,
-  transferirHumano,
-  buscarFAQ
-};
+function parseToolArguments(value: unknown): Record<string, string> {
+  const parsed: unknown = typeof value === "string" ? JSON.parse(value) : value;
+  if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) throw new Error("Invalid tool arguments");
+  const args: Record<string, string> = {};
+  for (const [key, item] of Object.entries(parsed)) {
+    if (typeof item !== "string") throw new Error(`Invalid tool field: ${key}`);
+    args[key] = item;
+  }
+  return args;
+}
+
+function required(args: Record<string, string>, key: string): string {
+  if (!args[key]?.trim()) throw new Error(`Missing tool field: ${key}`);
+  return args[key];
+}
+
+async function dispatchTool(name: string, value: unknown): Promise<unknown> {
+  const args = parseToolArguments(value);
+  switch (name) {
+    case "guardarLead": return guardarLead({ ...args, name: required(args, "name"), contact: required(args, "contact") });
+    case "agendarCita": return agendarCita({ ...args, name: required(args, "name"), contact: required(args, "contact") });
+    case "transferirHumano": return transferirHumano({ reason: required(args, "reason") });
+    case "buscarFAQ": return buscarFAQ({ query: required(args, "query"), language: args.language });
+    default: throw new Error("Unknown tool");
+  }
+}
 
 export async function handleChatTurn({ session, userText, language }: ChatTurnInput): Promise<ChatResult> {
   const apiKey = process.env.OPENAI_API_KEY;
@@ -44,11 +64,7 @@ export async function handleChatTurn({ session, userText, language }: ChatTurnIn
     ...session.transcript.map((entry) => ({
       role: entry.role,
       content: entry.text
-    })),
-    {
-      role: "user",
-      content: userText
-    }
+    }))
   ];
 
   const response = await fetchWithRetry(
@@ -128,6 +144,7 @@ export async function handleChatTurn({ session, userText, language }: ChatTurnIn
     2
   );
 
+  if (!response.ok) throw new Error(`LLM error: ${response.status}`);
   const payload = (await response.json()) as OpenAIResponse;
   const reply = extractAssistantReply(payload) ?? getFallbackReply(language, userText);
   const actions = await runTools(payload);
@@ -137,10 +154,10 @@ export async function handleChatTurn({ session, userText, language }: ChatTurnIn
 
 function getFallbackReply(language: SupportedLanguage, userText: string): string {
   const prompts: Record<SupportedLanguage, string> = {
-    es: "Gracias por tu mensaje. ¿Cuál es tu nombre y la mejor forma de contacto?",
-    en: "Thanks for sharing. What is your name and best contact method?",
-    fr: "Merci pour votre message. Quel est votre nom et le meilleur contact ?",
-    pt: "Obrigado pela mensagem. Qual é o seu nome e o melhor contato?"
+    es: "Gracias por tu mensaje. ¿Cuál es tu nombre?",
+    en: "Thanks for sharing. What is your name?",
+    fr: "Merci pour votre message. Quel est votre nom ?",
+    pt: "Obrigado pela mensagem. Qual é o seu nome?"
   };
 
   return prompts[language] ?? userText;
@@ -151,7 +168,7 @@ type OpenAIResponse = {
     type: string;
     content?: Array<{ type: string; text?: string }>;
     name?: string;
-    arguments?: Record<string, unknown>;
+    arguments?: unknown;
   }>;
 };
 
@@ -174,11 +191,8 @@ async function runTools(payload: OpenAIResponse): Promise<Array<{ tool: string; 
 
   for (const item of output) {
     if (item.type === "function_call" && item.name && item.arguments) {
-      const handler = toolHandlers[item.name as keyof typeof toolHandlers];
-      if (handler) {
-        const result = await handler(item.arguments);
-        actions.push({ tool: item.name, payload: result });
-      }
+      const result = await dispatchTool(item.name, item.arguments);
+      actions.push({ tool: item.name, payload: result });
     }
   }
 

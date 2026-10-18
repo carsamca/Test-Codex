@@ -1,0 +1,165 @@
+{
+  "languages": {
+    "Olá": "es",
+    "orçamento": "fr",
+    "você": "fr",
+    "I have a budget": "fr",
+    "merci beaucoup": "fr"
+  },
+  "localeHints": {
+    "es-ES": "en",
+    "en-US": "en",
+    "fr-FR": "en",
+    "pt-BR": "en"
+  },
+  "flowTranscript": [
+    {
+      "role": "user",
+      "text": "hola",
+      "timestamp": "2026-10-18T23:18:12.183Z"
+    },
+    {
+      "role": "user",
+      "text": "hola",
+      "timestamp": "2026-10-18T23:18:12.185Z"
+    },
+    {
+      "role": "assistant",
+      "text": "Gracias por tu mensaje. ¿Cuál es tu nombre y la mejor forma de contacto?",
+      "timestamp": "2026-10-18T23:18:12.185Z"
+    }
+  ],
+  "audioSTT": {
+    "status": 200,
+    "body": {
+      "text": "",
+      "language": "en"
+    }
+  },
+  "emptySTT": {
+    "status": 200,
+    "body": {
+      "text": "",
+      "language": "en"
+    }
+  },
+  "validation": {
+    "missingChat": {
+      "status": 400,
+      "body": {
+        "error": "sessionId and text are required."
+      }
+    },
+    "numericText": {
+      "status": 500,
+      "body": {
+        "error": "Unexpected server error.",
+        "message": "text.toLowerCase is not a function"
+      }
+    },
+    "blankChat": {
+      "status": 200,
+      "body": {
+        "reply": "Thanks for sharing. What is your name and best contact method?",
+        "language": "en",
+        "voice": "alloy",
+        "actions": []
+      }
+    },
+    "missingTTS": {
+      "status": 400,
+      "body": {
+        "error": "text is required."
+      }
+    }
+  },
+  "llmInput": [
+    {
+      "role": "system",
+      "content": "You are a friendly voice sales agent. Never make up prices. Ask one question at a time to collect name, contact, need, budget, and urgency. Handle objections (price, time, comparison, 'I'll think about it') with empathy and suggest a next step. Close with a CTA: book a call, leave details, or transfer to a human."
+    },
+    {
+      "role": "user",
+      "content": "hello"
+    },
+    {
+      "role": "assistant",
+      "content": "Thanks for sharing. What is your name and best contact method?"
+    },
+    {
+      "role": "user",
+      "content": "hello"
+    }
+  ],
+  "guardarLead": {
+    "reply": "Gracias por tu mensaje. ¿Cuál es tu nombre y la mejor forma de contacto?",
+    "actions": [
+      {
+        "tool": "guardarLead",
+        "payload": {
+          "status": "ok",
+          "file": "/tmp/voice-audit-skWVLK/data/leads.jsonl"
+        }
+      }
+    ]
+  },
+  "agendarCita": {
+    "reply": "Gracias por tu mensaje. ¿Cuál es tu nombre y la mejor forma de contacto?",
+    "actions": [
+      {
+        "tool": "agendarCita",
+        "payload": {
+          "status": "ok",
+          "file": "/tmp/voice-audit-skWVLK/data/appointments.jsonl"
+        }
+      }
+    ]
+  },
+  "transferirHumano": {
+    "reply": "Gracias por tu mensaje. ¿Cuál es tu nombre y la mejor forma de contacto?",
+    "actions": [
+      {
+        "tool": "transferirHumano",
+        "payload": {
+          "status": "ok",
+          "file": "/tmp/voice-audit-skWVLK/data/handoffs.jsonl"
+        }
+      }
+    ]
+  },
+  "buscarFAQ": {
+    "error": "Cannot read properties of undefined (reading 'toLowerCase')"
+  },
+  "toolFiles": {
+    "appointments.jsonl": [
+      {
+        "timestamp": "2026-10-18T23:18:12.200Z",
+        "payload": "{\"name\":\"Synthetic Test\",\"contact\":\"test@example.invalid\",\"timezone\":\"UTC\"}"
+      }
+    ],
+    "handoffs.jsonl": [
+      {
+        "timestamp": "2026-10-18T23:18:12.200Z",
+        "payload": "{\"reason\":\"Synthetic test\"}"
+      }
+    ],
+    "leads.jsonl": [
+      {
+        "timestamp": "2026-10-18T23:18:12.199Z",
+        "payload": "{\"name\":\"Synthetic Test\",\"contact\":\"test@example.invalid\"}"
+      }
+    ]
+  },
+  "providerError": {
+    "reply": "Gracias por tu mensaje. ¿Cuál es tu nombre y la mejor forma de contacto?",
+    "actions": []
+  },
+  "retryAttempts": 3,
+  "mockTTS": {
+    "audioBase64": "AQID",
+    "provider": "openai"
+  },
+  "rateLimitedRequests": 25,
+  "checks": 50,
+  "mode": "baseline"
+}
